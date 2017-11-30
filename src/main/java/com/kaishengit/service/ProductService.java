@@ -2,6 +2,7 @@ package com.kaishengit.service;
 
 import com.kaishengit.dao.ProductDao;
 import com.kaishengit.pojo.Product;
+import com.kaishengit.util.RequestQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ public class ProductService {
     private ProductDao productDao;
 
     public List<Product> findAll() {
-        return  productDao.findAll();
+        return  productDao.findByPage(0,100);
     }
 
 
@@ -38,5 +39,9 @@ public class ProductService {
 
     public void delete(Integer id) {
         productDao.deleteById(id);
+    }
+
+    public List<Product> findByRequestQuery(List<RequestQuery> requestQueryList) {
+        return productDao.findByRquestQueryList(requestQueryList);
     }
 }

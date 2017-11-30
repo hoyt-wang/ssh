@@ -2,6 +2,7 @@ package com.kaishengit.controller;
 
 import com.kaishengit.pojo.Product;
 import com.kaishengit.service.ProductService;
+import com.kaishengit.util.RequestQuery;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by hoyt on 2017/11/29.
@@ -29,8 +33,10 @@ public class ProductController {
      * @return
      */
     @GetMapping
-    public String home(Model model) {
-        model.addAttribute("productList",productService.findAll());
+    public String home(Model model, HttpServletRequest request) {
+        List<RequestQuery> requestQueryList = RequestQuery.requestQueryBuilder(request);
+        List<Product> productList = productService.findByRequestQuery(requestQueryList);
+        model.addAttribute("productList",productList);
         return "list";
     }
 

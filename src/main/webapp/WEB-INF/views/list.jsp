@@ -12,6 +12,24 @@
 </head>
 <body>
 <div class="container">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="" class="form-inline">
+                <input type="text" placeholder="商品名称" name="q_productName_like_s" class="form-control">
+                <input type="text" placeholder="商品价格" name="q_price_eq_bd" class="form-control">
+                <input type="text" placeholder="市场价格" name="q_marketPrice_eq_bd" class="form-control">
+                <button class="btn btn-primary">搜索</button>
+                <c:if test="${not empty param}">
+                    <button class="btn btn info pull-right"><a href="/product">返回列表</a></button>
+                </c:if>
+
+
+            </form>
+        </div>
+    </div>
+
+
     <a href="/product/new" class="btn btn-success">添加</a>
     <table class="table">
         <thead>

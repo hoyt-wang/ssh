@@ -21,6 +21,7 @@
             <li>市场价： ${product.marketPrice}</li>
             <li>考拉价:  ${product.price}</li>
             <li>评论数量:  ${product.commentNum}</li>
+            <li>商品类型： ${product.productType.typeName}</li>
         </ul>
         <a href="/product">返回列表</a>
     </div>

@@ -27,6 +27,11 @@ public class Product {
     @Column(name = "comment_num")
     private Integer commentNum;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
+    private ProductType productType;
+
+
     public Integer getId() {
         return id;
     }
@@ -73,5 +78,13 @@ public class Product {
 
     public void setCommentNum(Integer commentNum) {
         this.commentNum = commentNum;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 }
