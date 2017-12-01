@@ -16,15 +16,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <form action="" class="form-inline">
-                <input type="text" placeholder="商品名称" name="q_productName_like_s" class="form-control">
-                <input type="text" placeholder="商品价格" name="q_price_eq_bd" class="form-control">
-                <input type="text" placeholder="市场价格" name="q_marketPrice_eq_bd" class="form-control">
+                <input type="text" placeholder="商品名称" name="q_like_s_productName" value="${param.q_like_s_productName}" class="form-control">
+                <input type="text" placeholder="商品价格或市场价格" name="q_eq_bd_price_or_marketPrice"value="${param.q_eq_bd_price_or_marketPrice}" class="form-control">
                 <button class="btn btn-primary">搜索</button>
                 <c:if test="${not empty param}">
                     <button class="btn btn info pull-right"><a href="/product">返回列表</a></button>
                 </c:if>
-
-
             </form>
         </div>
     </div>
@@ -42,7 +39,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${productList}" var="product">
+        <c:forEach items="${page.items}" var="product">
             <tr>
                 <td><a href="/product/${product.id}">${product.productName}</a></td>
                 <td>${product.price}</td>
@@ -53,6 +50,26 @@
         </c:forEach>
         </tbody>
     </table>
+    <ul id="pagination-demo" class="pagination-sm"></ul>
 </div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.twbsPagination.min.js"></script>
+<script>
+    $(function(){
+
+        $('#pagination-demo').twbsPagination({
+            totalPages: ${page.totalPageSize},
+            visiblePages: 10,
+            first:'首页',
+            last:'末页',
+            prev:'上一页',
+            next:'下一页',
+            href:"?q_like_s_productName="+ encodeURIComponent('${param.q_like_s_productName}') +""
+            +"&q_eq_bd_price_or_marketPrice="+ encodeURIComponent('${param.q_eq_bd_price_or_marketPrice}')+"&p={{number}}"
+        });
+    });
+</script>
 </body>
 </html>
